@@ -1,0 +1,30 @@
+<ng-container *ngTemplateOutlet="temp1"></ng-container>
+<ng-template #temp1>
+  <div>
+    <p>*ngTemplateOutletでtemp1を呼び出し</p>
+  </div>
+</ng-template>
+
+<ng-container *ngTemplateOutlet="temp2; context: {obj: obj}"></ng-container>
+<ng-template #temp2 let-test="obj">
+  <div>
+    <p>*ngTemplateOutletで変数を受け取る</p>
+    <p>{{ test.id }}:{{ test.name }}</p>
+  </div>
+</ng-template>
+
+<div>
+  <p>*ngTemplateOutletで再帰処理</p>
+  <ul>
+    <ng-container *ngTemplateOutlet="temp3; context: {node: trees}"></ng-container>
+  </ul>
+</div>
+<ng-template #temp3 let-treeNode="node">
+  <li *ngFor="let tree of treeNode">
+    {{ tree.id }}:{{ tree.name }}
+    <ul *ngIf="tree.children as children">
+      <ng-container *ngTemplateOutlet="temp3; context: {node: children}"></ng-container>
+    </ul>
+  </li>
+</ng-template>
+  

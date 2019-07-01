@@ -1,0 +1,104 @@
+<div>
+  <p>とりあえず並べる</p>
+  <span *ngFor="let num of array">{{ num }}</span>
+</div>
+<div>
+  <p>5からスタート</p>
+  <span *ngFor="let num of array | slice: 4">{{ num }}</span>
+</div>
+<div>
+  <p>*ngForで使える変数</p>
+  <table>
+    <thead>
+      <tr>
+        <th>変数</th>
+        <th>概要</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>index</td>
+        <td>ループ回数(0～length-1)</td>
+      </tr>
+      <tr>
+        <td>first</td>
+        <td>最初の要素であるか</td>
+      </tr>
+      <tr>
+        <td>last</td>
+        <td>最後の要素であるか</td>
+      </tr>
+      <tr>
+        <td>even</td>
+        <td>index値が偶数であるか</td>
+      </tr>
+      <tr>
+        <td>odd</td>
+        <td>index値が奇数であるか</td>
+      </tr>
+    </tbody>
+  </table>
+  <table id="test">
+    <thead>
+      <tr>
+        <th>value</th>
+        <th>index</th>
+        <th>first</th>
+        <th>last</th>
+        <th>even</th>
+        <th>odd</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let num of array; index as i; first as first; last as last; even as even; odd as odd">
+        <td>{{ num }}</td>
+        <td>{{ i }}</td>
+        <td>{{ first ? '〇' : '×' }}</td>
+        <td>{{ last ? '〇' : '×' }}</td>
+        <td>{{ even ? '〇' : '×' }}</td>
+        <td>{{ odd ? '〇' : '×' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div>
+  <p>ng-containerで要素のセットを繰り返す</p>
+  <ng-container *ngFor="let num of array | slice: 0: 2">
+    <p>{{ num }}回目のp要素</p>
+    <span>(´・ω・`) {{ num }}回目のspan要素</span>
+  </ng-container>
+</div>
+<div>
+  <p>trackByで要素の追加/削除（デベロッパーツールで確認してね）</p>
+  <p>trackByなし</p>
+  <table>
+    <tbody>
+      <tr>
+        <td *ngFor="let num of tracks1" class="track">{{ num.name }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <button (click)="push1()">更新</button>
+  <button (click)="pop1()">戻す</button>
+  <p>trackByあり</p>
+  <table>
+    <tbody>
+      <tr>
+        <td *ngFor="let num of tracks2; trackBy: trackFn" class="track">{{ num.name }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <button (click)="push2()">更新</button>
+  <button (click)="pop2()">戻す</button>
+  <p>trackByなし、配列のメソッドで変更</p>
+  <table>
+    <tbody>
+      <tr>
+        <td *ngFor="let num of tracks3" class="track">{{ num.name }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <button (click)="push3()">push</button>
+  <button (click)="pop3()">pop</button>
+  <button (click)="shift3()">shift</button>
+</div>

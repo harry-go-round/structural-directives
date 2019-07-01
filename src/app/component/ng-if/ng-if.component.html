@@ -1,0 +1,41 @@
+<div>
+  <p>*ngIfでDOM要素を追加または削除</p>
+  <ng-container *ngFor="let bool of bools">
+    <label>
+      <input type="radio" [(ngModel)]="selected1" name="aaa" [value]="bool.value">{{ bool.name }}
+    </label>
+  </ng-container>
+  <p *ngIf="selected1">true</p>
+  <p *ngIf="!selected1">false</p>
+</div>
+<div>
+  <p>*ngIfでng-templateを追加または削除</p>
+  <ng-container *ngFor="let bool of bools">
+    <label>
+      <input type="radio" [(ngModel)]="selected2" name="bbb" [value]="bool.value">{{ bool.name }}
+    </label>
+  </ng-container>
+  <ng-container *ngIf="selected2; then test1; else test2"></ng-container>
+  <ng-template #test1>
+    <p>test1</p>
+    <p>true</p>
+  </ng-template>
+  <ng-template #test2>
+    <p>test2</p>
+    <p>false</p>
+  </ng-template>
+</div>
+<div>
+  <p>*ngIfで真のときに値を渡す</p>
+  <ng-container *ngFor="let bool of bools">
+    <label>
+      <input type="radio" [(ngModel)]="selected3" name="ccc" [value]="bool.value">{{ bool.name }}
+    </label>
+  </ng-container>
+  <ng-container *ngIf="selected3 as value; else test4">
+    <p>{{ value }}</p>
+  </ng-container>
+  <ng-template #test4 let-value="value">
+    <p>abcde</p>
+  </ng-template>
+</div>

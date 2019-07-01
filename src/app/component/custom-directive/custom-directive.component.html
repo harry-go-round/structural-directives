@@ -1,0 +1,15 @@
+<p>自作ディレクティブ : 素数の時true</p>
+<table>
+  <thead>
+    <tr>
+      <th>value</th>
+      <th>prime</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *appPrimeNumber="let num of nums; prime as prime">
+      <td>{{ num }}</td>
+      <td>{{ prime? '〇' : '×' }}</td>
+    </tr>
+  </tbody>
+</table>
